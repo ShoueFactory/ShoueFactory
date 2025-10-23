@@ -61,28 +61,6 @@
             transform: scale(1.1);
         }
 
-        .cart-icon {
-            font-size: 1.5em;
-            cursor: pointer;
-            position: relative;
-            transition: transform 0.3s;
-        }
-
-        .cart-icon:hover {
-            transform: scale(1.2);
-        }
-
-        .cart-count {
-            background: #ff6b6b;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.8em;
-            position: absolute;
-            top: -10px;
-            right: -10px;
-        }
-
         /* Hamburger Menu */
         .hamburger {
             display: none;
@@ -118,8 +96,10 @@
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
             flex-direction: column;
-            padding: 20px;
+            padding: 10px 20px; /* Reduced padding for compactness */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-height: 200px; /* Limit height to make it compact */
+            overflow-y: auto; /* Add scroll if needed */
         }
 
         nav.mobile-menu.active {
@@ -128,7 +108,15 @@
 
         nav.mobile-menu ul {
             flex-direction: column;
-            gap: 15px;
+            gap: 10px; /* Reduced gap for compactness */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav.mobile-menu a {
+            padding: 8px 0; /* Smaller padding */
+            border-bottom: 1px solid #eee;
+            display: block;
         }
 
         /* Hero Section */
@@ -312,43 +300,6 @@
             background: #45b7aa;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background: white;
-            margin: 15% auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        .close {
-            float: right;
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-        .checkout-button {
-            background: #4ecdc4;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            cursor: pointer;
-            border-radius: 10px;
-            font-size: 1em;
-        }
-
         /* Footer */
         footer {
             text-align: center;
@@ -402,18 +353,13 @@
                 padding: 15px;
             }
 
-            .add-to-cart, .cta-button, .submit-button, .checkout-button {
+            .add-to-cart, .cta-button, .submit-button {
                 padding: 12px 20px;
                 font-size: 1em;
             }
 
             .contact-form input, .contact-form textarea {
                 padding: 10px;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 20% auto;
             }
         }
 
@@ -434,7 +380,7 @@
                 padding: 10px;
             }
 
-            .add-to-cart, .cta-button, .submit-button, .checkout-button {
+            .add-to-cart, .cta-button, .submit-button {
                 padding: 10px 15px;
                 font-size: 0.9em;
             }
@@ -469,10 +415,6 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <div class="cart-icon" id="cart-icon">
-            <span>🛒</span>
-            <span class="cart-count" id="cart-count">0</span>
-        </div>
     </header>
 
     <section id="home" class="hero">
@@ -549,4 +491,28 @@
                 <button class="add-to-cart" data-name="High Heels" data-price="69.99">Add to Cart</button>
             </div>
             <div class="product-card" data-category="sandals">
-                <img src="https://source.unsplash.com/300x200/?flip-flops" alt
+                <img src="https://source.unsplash.com/300x200/?flip-flops" alt="Flip Flops">
+                <h3>Flip Flops</h3>
+                <p>$19.99</p>
+                <button class="add-to-cart" data-name="Flip Flops" data-price="19.99">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2>About ShoeFactory</h2>
+            <p>At ShoeFactory, we believe that every step should be a statement. Founded in 2020, our mission is to provide high-quality, affordable shoes that blend comfort, style, and durability. From casual sneakers to elegant heels, we cater to all your footwear needs. Our team of designers and craftsmen ensure that each pair is crafted with care, using sustainable materials wherever possible. Join thousands of satisfied customers who trust ShoeFactory for their shoe shopping!</p>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"Amazing quality and fast delivery! My new sneakers are perfect."</p>
+                <cite>- Jane Doe</cite>
+            </div>
+            <div class="testimonial-card">
+                <p>"ShoeFactory has the best collection. Highly recommend!"</p>
+                <cite>-
