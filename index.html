@@ -1,71 +1,503 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Large E-commerce Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoeFactory - Your Ultimate Shoe Destination</title>
     <style>
-        /* CSS styles go here */
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b, #86a8e7, #91ea91, #ffd700, #ff69b4);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ff6b6b;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6b6b;
+            transform: scale(1.1);
+        }
+
+        .cart-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .cart-count {
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8em;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 150px 20px 100px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-top: 80px;
+            animation: fadeIn 2s;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            color: #4ecdc4;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Categories */
+        .categories {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .add-to-cart {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #ff5252;
+        }
+
+        /* About Section */
+        .about {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            background: #4ecdc4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .submit-button:hover {
+            background: #45b7aa;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .checkout-button {
+            background: #4ecdc4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-grid, .category-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .logo {
+                font-size: 2em;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#categories">Categories</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#cart">Cart</a></li>
-            <li><a href="#checkout">Checkout</a></li>
-        </ul>
-    </nav>
+    <header>
+        <div class="logo">ShoeFactory</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon" id="cart-icon">
+            <span>🛒</span>
+            <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </header>
 
-    <section id="home">
-        <h1>Welcome to Our E-commerce Website</h1>
-        <p>Explore our wide range of products and shop online!</p>
+    <section id="home" class="hero">
+        <h1>Welcome to ShoeFactory!</h1>
+        <p>Step into style with our colourful collection of shoes. Discover comfort, fashion, and quality all in one place!</p>
+        <button class="cta-button" onclick="scrollToSection('products')">Shop Now</button>
     </section>
 
-    <section id="categories">
-        <h2>Product Categories</h2>
-        <ul>
-            <li><a href="#electronics">Electronics</a></li>
-            <li><a href="#clothing">Clothing</a></li>
-            <li><a href="#home-decor">Home Decor</a></li>
-            <li><a href="#books">Books</a></li>
-        </ul>
-    </section>
-
-    <section id="products">
-        <h2>Product Listings</h2>
-        <div class="product-list">
-            <!-- Product listings go here -->
+    <section id="categories" class="categories">
+        <h2>Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="filterProducts('sneakers')">
+                <h3>Sneakers</h3>
+                <p>Comfortable and stylish for everyday wear.</p>
+            </div>
+            <div class="category-card" onclick="filterProducts('boots')">
+                <h3>Boots</h3>
+                <p>Durable and adventurous footwear.</p>
+            </div>
+            <div class="category-card" onclick="filterProducts('heels')">
+                <h3>Heels</h3>
+                <p>Elegant and sophisticated designs.</p>
+            </div>
+            <div class="category-card" onclick="filterProducts('sandals')">
+                <h3>Sandals</h3>
+                <p>Perfect for summer and casual outings.</p>
+            </div>
         </div>
     </section>
 
-    <section id="cart">
-        <h2>Your Shopping Cart</h2>
-        <div class="cart-items">
-            <!-- Cart items go here -->
+    <section id="products" class="products">
+        <h2>Our Products</h2>
+        <div class="product-grid" id="product-grid">
+            <div class="product-card" data-category="sneakers">
+                <img src="https://source.unsplash.com/300x200/?sneakers" alt="Classic Sneakers">
+                <h3>Classic Sneakers</h3>
+                <p>$49.99</p>
+                <button class="add-to-cart" data-name="Classic Sneakers" data-price="49.99">Add to Cart</button>
+            </div>
+            <div class="product-card" data-category="boots">
+                <img src="https://source.unsplash.com/300x200/?boots" alt="Adventure Boots">
+                <h3>Adventure Boots</h3>
+                <p>$79.99</p>
+                <button class="add-to-cart" data-name="Adventure Boots" data-price="79.99">Add to Cart</button>
+            </div>
+            <div class="product-card" data-category="heels">
+                <img src="https://source.unsplash.com/300x200/?heels" alt="Elegant Heels">
+                <h3>Elegant Heels</h3>
+                <p>$59.99</p>
+                <button class="add-to-cart" data-name="Elegant Heels" data-price="59.99">Add to Cart</button>
+            </div>
+            <div class="product-card" data-category="sandals">
+                <img src="https://source.unsplash.com/300x200/?sandals" alt="Summer Sandals">
+                <h3>Summer Sandals</h3>
+                <p>$29.99</p>
+                <button class="add-to-cart" data-name="Summer Sandals" data-price="29.99">Add to Cart</button>
+            </div>
+            <div class="product-card" data-category="sneakers">
+                <img src="https://source.unsplash.com/300x200/?running-shoes" alt="Running Sneakers">
+                <h3>Running Sneakers</h3>
+                <p>$54.99</p>
+                <button class="add-to-cart" data-name="Running Sneakers" data-price="54.99">Add to Cart</button>
+            </div>
+            <div class="product-card" data-category="boots">
+                <img src="https://source.unsplash.com/300x200/?winter-boots" alt="Winter Boots">
+                <h3>Winter Boots</h3>
+                <p>$89.99</p>
+                <button class="add-to-cart" data-name="Winter Boots" data-price="89.99">Add to Cart</button>
+            </div>
+            <div class="product-card" data-category="heels">
+                <img src="https://source.unsplash.com/300x200/?high-heels" alt="High Heels">
+                <h3>High Heels</h3>
+                <p>$69.99</p>
+                <button class="add-to-cart" data-name="High Heels" data-price="69.99">Add to Cart</button>
+            </div>
+            <div class="product-card" data-category="sandals">
+                <img src="https://source.unsplash.com/300x200/?flip-flops" alt="Flip Flops">
+                <h3>Flip Flops</h3>
+                <p>$19.99</p>
+                <button class="add-to-cart" data-name="Flip Flops" data-price="19.99">Add to Cart</button>
+            </div>
         </div>
-        <button>Proceed to Checkout</button>
     </section>
 
-    <section id="checkout">
-        <h2>Checkout</h2>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="address">Address:</label>
-            <textarea id="address" name="address" required></textarea>
-            <button type="submit">Place Order</button>
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2>About ShoeFactory</h2>
+            <p>At ShoeFactory, we believe that every step should be a statement. Founded in 2020, our mission is to provide high-quality, affordable shoes that blend comfort, style, and durability. From casual sneakers to elegant heels, we cater to all your footwear needs. Our team of designers and craftsmen ensure that each pair is crafted with care, using sustainable materials wherever possible. Join thousands of satisfied customers who trust ShoeFactory for their shoe shopping!</p>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"Amazing quality and fast delivery! My new sneakers are perfect."</p>
+                <cite>- Jane Doe</cite>
+            </div>
+            <div class="testimonial-card">
+                <p>"ShoeFactory has the best collection. Highly recommend!"</p>
+                <cite>- John Smith</cite>
+            </div>
+            <div class="testimonial-card">
+                <p>"Comfortable and stylish. Will shop here again."</p>
+                <cite>- Emily Johnson</cite>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form class="contact-form" id="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="submit-button">Send Message</button>
         </form>
     </section>
 
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: $<span id="cart-total">0.00</span></p>
+            <button class="checkout-button">Checkout</button>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2023 Large E-commerce Website. All rights reserved.</p>
+        <p>&copy; 2023 ShoeFactory. All rights reserved. | Follow us on social media!</p>
     </footer>
 
     <script>
-        // JavaScript code goes here
-    </script>
-</body>
-</html>
+        // Cart functionality
+        let cart = [];
+        let cartCount = 0;
+        let total = 0;
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                cart.push({ name, price });
+                cartCount++;
+                total += price;
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            document.getElementById('cart-count').textContent = cartCount;
+            document.getElementById('cart-total').textContent = total.toFixed(2);
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const li = document
