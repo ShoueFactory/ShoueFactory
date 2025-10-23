@@ -1,50 +1,79 @@
-// Create the header element
-const header = document.createElement('div');
-header.classList.add('header');
-header.innerHTML = '<h1>Shoe Factory</h1>';
-document.body.appendChild(header);
+// Create the HTML structure
+const html = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <title>Animated Website</title>
+      <style>
+          body {
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              background-image: url('background.jpg');
+              background-size: cover;
+              background-position: center;
+              animation: rotateBackground 10s infinite linear;
+          }
 
-// Create the container element
-const container = document.createElement('div');
-container.classList.add('container');
-document.body.appendChild(container);
+          @keyframes rotateBackground {
+              0% {
+                  transform: rotate(0deg);
+              }
+              100% {
+                  transform: rotate(360deg);
+              }
+          }
 
-// Create the template element
-const template = document.createElement('div');
-template.classList.add('template', 'fade-in');
-template.innerHTML = `
-    <h2>Welcome to Shoe Factory</h2>
-    <p>Discover the latest trends and styles in footwear.</p>
+          .container {
+              text-align: center;
+              color: white;
+          }
+
+          .animated-text {
+              font-size: 3em;
+              animation: bounce 2s infinite;
+          }
+
+          @keyframes bounce {
+              0%, 100% {
+                  transform: translateY(0);
+              }
+              50% {
+                  transform: translateY(-10px);
+              }
+          }
+
+          .button {
+              display: inline-block;
+              padding: 10px 20px;
+              margin: 10px;
+              font-size: 1.2em;
+              color: white;
+              background-color: blue;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+          }
+
+          .button:hover {
+              background-color: green;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <h1 class="animated-text">Welcome to My Website</h1>
+          <button class="button">Learn More</button>
+          <button class="button">Contact Us</button>
+      </div>
+  </body>
+  </html>
 `;
-container.appendChild(template);
 
-// Create the product elements
-const products = [
-    {
-        id: 1,
-        name: 'Shoe 1',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        price: 50,
-        image: 'shoe1.jpg'
-    },
-    {
-        id: 2,
-        name: 'Shoe 2',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        price: 70,
-        image: 'shoe2.jpg'
-    }
-];
-
-products.forEach(product => {
-    const productElement = document.createElement('div');
-    productElement.classList.add('product', 'fade-in');
-    productElement.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <p>Price: $${product.price}</p>
-        <button>Add to Cart</button>
-    `;
-    container.appendChild(productElement);
-});
+// Write the HTML to the document
+document.write(html);
